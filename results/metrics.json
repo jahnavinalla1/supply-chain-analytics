@@ -1,0 +1,188 @@
+{
+  "title": "Supplier reliability and inventory planning",
+  "question": "Which suppliers need corrective action, and how sensitive is a reorder policy to demand?",
+  "kpis": {
+    "Purchase orders": "900",
+    "Overall OTIF": "50.9%",
+    "Mean lead time": "9.8 days",
+    "Base-case reorder point": "287 units"
+  },
+  "tables": {
+    "suppliers": [
+      {
+        "supplier": "Beacon",
+        "purchase_orders": 303,
+        "otif_pct": 30.03,
+        "unit_fill_pct": 98.77,
+        "mean_lead_days": 11.56,
+        "mean_late_days": 1.95,
+        "ordered_spend": 721920.0
+      },
+      {
+        "supplier": "Cedar",
+        "purchase_orders": 293,
+        "otif_pct": 52.22,
+        "unit_fill_pct": 98.64,
+        "mean_lead_days": 9.48,
+        "mean_late_days": 0.73,
+        "ordered_spend": 708936.0
+      },
+      {
+        "supplier": "Atlas",
+        "purchase_orders": 304,
+        "otif_pct": 70.39,
+        "unit_fill_pct": 98.69,
+        "mean_lead_days": 8.39,
+        "mean_late_days": 0.31,
+        "ordered_spend": 685692.0
+      }
+    ],
+    "monthly_otif": [
+      {
+        "due_month": "2025-01",
+        "purchase_orders": 57,
+        "otif_pct": 57.89
+      },
+      {
+        "due_month": "2025-02",
+        "purchase_orders": 71,
+        "otif_pct": 35.21
+      },
+      {
+        "due_month": "2025-03",
+        "purchase_orders": 91,
+        "otif_pct": 58.24
+      },
+      {
+        "due_month": "2025-04",
+        "purchase_orders": 80,
+        "otif_pct": 55.0
+      },
+      {
+        "due_month": "2025-05",
+        "purchase_orders": 69,
+        "otif_pct": 52.17
+      },
+      {
+        "due_month": "2025-06",
+        "purchase_orders": 83,
+        "otif_pct": 46.99
+      },
+      {
+        "due_month": "2025-07",
+        "purchase_orders": 85,
+        "otif_pct": 56.47
+      },
+      {
+        "due_month": "2025-08",
+        "purchase_orders": 90,
+        "otif_pct": 56.67
+      },
+      {
+        "due_month": "2025-09",
+        "purchase_orders": 82,
+        "otif_pct": 43.9
+      },
+      {
+        "due_month": "2025-10",
+        "purchase_orders": 89,
+        "otif_pct": 48.31
+      },
+      {
+        "due_month": "2025-11",
+        "purchase_orders": 83,
+        "otif_pct": 51.81
+      },
+      {
+        "due_month": "2025-12",
+        "purchase_orders": 20,
+        "otif_pct": 35.0
+      }
+    ],
+    "abc_spend": [
+      {
+        "sku": "SKU-04",
+        "ordered_spend": 1060920.0,
+        "cumulative_spend_pct": 50.13,
+        "abc_class": "A"
+      },
+      {
+        "sku": "SKU-03",
+        "ordered_spend": 548380.0,
+        "cumulative_spend_pct": 76.03,
+        "abc_class": "A"
+      },
+      {
+        "sku": "SKU-02",
+        "ordered_spend": 355808.0,
+        "cumulative_spend_pct": 92.84,
+        "abc_class": "A"
+      },
+      {
+        "sku": "SKU-01",
+        "ordered_spend": 151440.0,
+        "cumulative_spend_pct": 100.0,
+        "abc_class": "B"
+      }
+    ],
+    "inventory_scenarios": [
+      {
+        "assumed_daily_demand": 16,
+        "assumed_daily_sd": 5,
+        "mean_lead_days": 9.812,
+        "lead_sd_days": 2.639,
+        "cycle_service_target_pct": 95,
+        "safety_stock_units": 75,
+        "reorder_point_units": 232
+      },
+      {
+        "assumed_daily_demand": 20,
+        "assumed_daily_sd": 5,
+        "mean_lead_days": 9.812,
+        "lead_sd_days": 2.639,
+        "cycle_service_target_pct": 95,
+        "safety_stock_units": 91,
+        "reorder_point_units": 287
+      },
+      {
+        "assumed_daily_demand": 24,
+        "assumed_daily_sd": 5,
+        "mean_lead_days": 9.812,
+        "lead_sd_days": 2.639,
+        "cycle_service_target_pct": 95,
+        "safety_stock_units": 108,
+        "reorder_point_units": 343
+      }
+    ]
+  },
+  "findings": [
+    "Beacon has the lowest OTIF (30.03%) across 303 purchase orders.",
+    "At an assumed 20 units/day, the illustrative reorder point is 287 units, including 91 units of safety stock.",
+    "Unit fill rate and purchase-order OTIF answer different questions; a nearly complete shipment can still fail OTIF."
+  ],
+  "actions": [
+    "Review lateness and short shipments with the lowest-OTIF supplier; set a time-bound corrective-action plan.",
+    "Prioritize A-class SKUs for supplier reviews, while considering criticality and substitutability alongside spend.",
+    "Replace assumed demand with daily sales and stockout observations, then backtest SKU-specific policies before changing inventory."
+  ],
+  "limitations": "Synthetic closed, single-line purchase orders; no open-order censoring or split receipts. ABC uses ordered spend and assigns a threshold-crossing item to the earlier class. Reorder scenarios assume independent daily demand and lead time, normal demand during lead time, and a 95% cycle-service target (not a 95% fill rate). Pooled lead times and assumed demand make this an illustration, not a purchasing recommendation.",
+  "chart": {
+    "title": "On-time, in-full deliveries by supplier",
+    "note": "Both the date and quantity requirement must pass for a purchase order to count.",
+    "unit": "%",
+    "rows": [
+      {
+        "label": "Beacon",
+        "value": 30.03
+      },
+      {
+        "label": "Cedar",
+        "value": 52.22
+      },
+      {
+        "label": "Atlas",
+        "value": 70.39
+      }
+    ]
+  }
+}

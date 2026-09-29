@@ -1,0 +1,4 @@
+supplier,purchase_orders,otif_pct,unit_fill_pct,mean_lead_days,mean_late_days,ordered_spend
+Beacon,303,30.03,98.77,11.56,1.95,721920.0
+Cedar,293,52.22,98.64,9.48,0.73,708936.0
+Atlas,304,70.39,98.69,8.39,0.31,685692.0

@@ -1,0 +1,4 @@
+assumed_daily_demand,assumed_daily_sd,mean_lead_days,lead_sd_days,cycle_service_target_pct,safety_stock_units,reorder_point_units
+16,5,9.812,2.639,95,75,232
+20,5,9.812,2.639,95,91,287
+24,5,9.812,2.639,95,108,343
